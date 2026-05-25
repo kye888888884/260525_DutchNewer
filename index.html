@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>더치페이</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap");
+        </style>
+        <link rel="stylesheet" href="style.css" />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
+    </head>
+
+    <body>
+        <h1>나눠내자</h1>
+        <div class="intro app-section page-block section-gap center-text gray">
+            <h2 class="center-text">서비스 설명</h2>
+            <span class="material-symbols-outlined black">waving_hand</span
+            ><br />
+            나눠내자 홈페이지에 오신 것을 환영합니다. 여기는 더치페이
+            페이지입니다. 여행이나 모임에서 각자 사용한 돈을 같게 만들기 위해
+            서로에게 보낼 금액을 계산해줍니다.
+            <br /><br />
+            <span class="material-symbols-outlined black">help</span><br />
+            이름과 사용 금액, 참여자를 변경하면 결과가 자동으로 갱신됩니다.
+            <br /><br />
+            <span class="material-symbols-outlined black"
+                >notification_important</span
+            ><br />
+            겹치는 이름이 있으면 안됩니다. 인원은 10명까지 추가 가능합니다.
+            1원씩 오차가 있을 수 있습니다.
+        </div>
+
+        <div class="member-section app-section page-block section-gap">
+            <h2 class="center-text">참여 인원</h2>
+            <div class="control-container">
+                <button
+                    class="control-button"
+                    id="add-button"
+                    onclick="addMember()"
+                >
+                    <span class="icons material-icons">person_add</span>
+                </button>
+                <button
+                    class="control-button"
+                    id="remove-button"
+                    onclick="removeMember()"
+                >
+                    <span class="icons material-icons">person_remove</span>
+                </button>
+            </div>
+            <div class="member-container">
+                <div class="member-field">
+                    <label class="member-label" for="member-name-1">참가자1:</label>
+                    <input
+                        id="member-name-1"
+                        type="text"
+                        maxlength="10"
+                        class="member-name"
+                        placeholder="이름"
+                        value=""
+                    />
+                </div>
+                <div class="member-field">
+                    <label class="member-label" for="member-name-2">참가자2:</label>
+                    <input
+                        id="member-name-2"
+                        type="text"
+                        maxlength="10"
+                        class="member-name"
+                        placeholder="이름"
+                        value=""
+                    />
+                </div>
+                <div class="member-field">
+                    <label class="member-label" for="member-name-3">참가자3:</label>
+                    <input
+                        id="member-name-3"
+                        type="text"
+                        maxlength="10"
+                        class="member-name"
+                        placeholder="이름"
+                        value=""
+                    />
+                </div>
+            </div>
+        </div>
+
+        <form class="page-block section-gap" onsubmit="return false" method="post">
+            <section class="app-section activity-section">
+                <div id="activities-container">
+                    <div class="activity-block">
+                        <div class="activity-title-row">
+                            <h2 class="center-text activity-title">활동 1</h2>
+                            <button type="button" class="activity-remove-btn">x</button>
+                        </div>
+                        <div class="activity-header">
+                            <span class="activity-header-label">지출자:</span>
+                            <select
+                                class="input activity-input activity-spender"
+                                id="activity-spender"
+                                required
+                            >
+                                <option value="">이름 선택</option>
+                            </select>
+                            <input
+                                type="number"
+                                class="input activity-input activity-money"
+                                id="activity-money"
+                                placeholder="금액"
+                                value=""
+                            />
+                            <span class="activity-header-suffix">원 사용</span>
+                        </div>
+                        <div class="activity-member-title">참여자 명단</div>
+                        <div class="activity-members" id="activity-members"></div>
+                        <button type="button" class="activity-add-btn">활동 추가</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-section section-gap">
+                <h2 class="center-text">추가 지출</h2>
+                <button type="button" id="additional">추가</button>
+                <div class="additional-container"></div>
+            </section>
+
+            <section class="app-section section-gap">
+                <h2 class="center-text">설정</h2>
+                <div class="setting-subtitle center-text">절삭 단위</div>
+                <div class="cut-wrap">
+                    <div class="cut-container gray">
+                        <input
+                            class="cut-input"
+                            type="radio"
+                            id="cut-radio1"
+                            name="cut"
+                            value="10"
+                        />
+                        <label class="cut-label" for="cut-radio1" for>10원</label>
+                        <input
+                            class="cut-input"
+                            type="radio"
+                            id="cut-radio2"
+                            name="cut"
+                            value="100"
+                            checked="true"
+                        />
+                        <label class="cut-label" for="cut-radio2" for>100원</label>
+                        <input
+                            class="cut-input"
+                            type="radio"
+                            id="cut-radio3"
+                            name="cut"
+                            value="1000"
+                        />
+                        <label class="cut-label" for="cut-radio3" for>1000원</label>
+                        <input
+                            class="cut-input"
+                            type="radio"
+                            id="cut-radio4"
+                            name="cut"
+                            value="10000"
+                        />
+                        <label class="cut-label" for="cut-radio4" for
+                            >10000원</label
+                        >
+                    </div>
+                </div>
+                <span id="money-italic"
+                    >송금액 글자 기울이기<input
+                        type="checkbox"
+                        name="money-italic"
+                        id=""
+                /></span>
+            </section>
+        </form>
+
+        <section class="app-section page-block section-gap canvas-section">
+            <h2 class="center-text">이렇게 송금하세요</h2>
+            <canvas id="result-canvas" width="100%" height="500px"></canvas>
+        </section>
+
+        <div class="scroll-container">
+            <div
+                class="scroll-btn material-icons"
+                id="scroll-up"
+                onclick="scrollSmooth(false)"
+            >
+                expand_less
+            </div>
+            <br />
+            <div
+                class="scroll-btn material-icons"
+                id="scroll-down"
+                onclick="scrollSmooth(true)"
+            >
+                expand_more
+            </div>
+        </div>
+
+        <section class="result-container app-section page-block section-gap">
+            <h2 class="center-text">참고 사항</h2>
+            <div>총 지출 금액: <span id="sum">0</span></div>
+            <div id="result"></div>
+        </section>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.3.1/fabric.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="moneydata.js"></script>
+        <script src="dutch.js"></script>
+    </body>
+</html>
